@@ -1,0 +1,27 @@
+<h1>Add Organization</h1>
+
+<%= form_with scope: :org, url: orgs_path, local: true do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :acronym %><br>
+    <%= form.text_field :acronym %>
+  </p>
+
+  <p>
+    <%= form.label :college %><br>
+    <%= form.text_field :college %>
+  </p>
+
+  <p>
+    <%= form.label :type %><br>
+    <%= form.text_field :type %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
