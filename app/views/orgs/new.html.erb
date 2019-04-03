@@ -1,37 +1,62 @@
-<h1>Add Organization</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Orgs To Pick</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+  </head>
+  <body>
+    <h1>Add Organization</h1>
 
-<%= form_with scope: :org, url: orgs_path, local: true do |form| %>
-  <p>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </p>
+    <%= form_with scope: :org, url: orgs_path, local: true do |form| %>
+      <div class="ui form">
+      <p>
+        Name:
+        <div class="field">
+          <%= form.text_field :name, placeholder: "Orgs To Pick"%>
+        </div>
+      </p>
 
-  <p>
-    <%= form.label :acronym %><br>
-    <%= form.text_field :acronym %>
-  </p>
+      <p>
+        Acronym:
+        <div class="field">
+          <%= form.text_field :acronym, placeholder: "OTP"%>
+        </div>
+      </p>
 
-  <p>
-    <%= form.label :college %><br>
-    <%= form.text_field :college %>
-  </p>
+      <p>
+        College:
+        <div class="field">
+          <%= form.text_field :college, placeholder: "Engineering"%>
+        </div>
+      </p>
 
-  <p>
-    <%= form.label :department %><br>
-    <%= form.text_field :department %>
-  </p>
+      <p>
+        Department:
+        <div class="field">
+          <%= form.text_field :department, placeholder: "DCS"%>
+        </div>
+      </p>
 
-  <p>
-    <%= form.label :scope %><br>
-    <%= form.text_field :scope %>
-  </p>
+      <p>
+        Scope:
+        <div class="field">
+          <%= form.text_field :scope, placeholder: "University Wide"%>
+        </div>
+      </p>
 
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </p>
+      <p>
+        Description:
+        <div class="field">
+          <%= form.text_area :description, class: 'textarea', placeholder: "A database for UP Orgs"%>
+        </div>
+      </p>
 
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+      <p>
+          <%= form.submit('Submit', class: "ui primary button") %>
+      </p>
+    <% end %>
+    </div>
+
+  </body>
+</html>
