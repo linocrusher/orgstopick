@@ -1,0 +1,33 @@
+<h1>Rate <%=@org.name%> </h1>
+
+<%= form_with scope: :rating, url: ratings_path, local: true do |form| %>
+  <%= hidden_field_tag :org, @org.id %>
+  <p>
+    <%= form.label :community %><br>
+    <%= form.number_field :community %>
+  </p>
+
+  <p>
+    <%= form.label :selfbenefit %><br>
+    <%= form.number_field :selfbenefit %>
+  </p>
+
+  <p>
+    <%= form.label :purpose %><br>
+    <%= form.number_field :purpose %>
+  </p>
+
+  <p>
+    <%= form.label :application %><br>
+    <%= form.number_field :application %>
+  </p>
+
+  <p>
+    <%= form.label :details %><br>
+    <%= form.text_area :details %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

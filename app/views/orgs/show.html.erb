@@ -1,0 +1,59 @@
+<p>
+  <strong>Name:</strong>
+  <%= @org.name %>
+</p>
+
+<p>
+  <strong>Acronym:</strong>
+  <%= @org.acronym %>
+</p>
+
+<p>
+  <strong>College:</strong>
+  <%= @org.college %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @org.department %>
+</p>
+
+<p>
+  <strong>Scope:</strong>
+  <%= @org.scope %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @org.description %>
+</p>
+
+<h1> Comments and Ratings </h1>
+
+<table>
+  <tr>
+    <th style="width: 100px" colspan="2">Rating</th>
+    <th>Comment</th>
+  </tr>
+
+  <% @ratings.each do |r| %>
+    <tr>
+      <td>Community:<br>
+      Purpose:<br>
+      Self-Benefit:<br>
+      App Process:</td>
+
+      <td><%= r.community %><br>
+      <%= r.purpose %><br>
+      <%= r.selfbenefit %><br>
+      <%= r.application %></td>
+
+      <td><%= r.details %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= form_with url: new_rating_path, local: true do |form| %>
+    <%= hidden_field_tag :id, @org.id %>
+    <%= form.submit 'Add Rating', class: 'link-btn' %>
+<% end %>

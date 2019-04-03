@@ -1,0 +1,24 @@
+<%= render :file=> 'app/views/partials/header.html.erb' %>
+<h1>All Organizations</h1>
+
+<table>
+  <tr>
+    <th>Acronym</th>
+    <th>College</th>
+    <th>Department</th>
+    <th>Scope</th>
+    <th>Rating</th>
+    <th></th>
+  </tr>
+
+  <% @orgs.each do |o| %>
+    <tr>
+      <td><%= o.acronym %></td>
+      <td><%= o.college %></td>
+      <td><%= o.department %></td>
+      <td><%= o.scope %></td>
+      <td>  </td>
+      <td><%= link_to 'Show', org_path(o) %></td>
+    </tr>
+  <% end %>
+</table>

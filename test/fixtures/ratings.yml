@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  community: 1
+  purpose: 1
+  selfbenefit: 1
+  application: 1
+  details: MyText
+  org: one
+
+two:
+  community: 1
+  purpose: 1
+  selfbenefit: 1
+  application: 1
+  details: MyText
+  org: two

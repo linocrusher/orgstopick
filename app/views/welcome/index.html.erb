@@ -1,21 +1,30 @@
 <!doctype html>
 <html lang="en">
-    <head>
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
+    <title>Orgs To Pick</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+  </head>
+  <body>
+      <!--MAIN CONTENT-->
+      <div class="ui items">
+      <div class="middle aligned content">
+          <h1 align = "center"> ORGS TO PICK </h1>
+          <p align = "center">A database of organizations in UP Diliman <br> Based from PROFS TO PICK</p>
+              <center>
+                <div class="ui action input">
+                  <input type="text" placeholder="Search...">
+                  <select class="ui compact selection dropdown">
+                    <option selected="" value="name">Name</option>
+                    <option value="acronym">Acronym</option>
+                  </select>
+                  <div class="ui button">Search</div>
+                </div> <br><br>
+                <a href="/orgs" class="ui right labeled icon button">  <i class="list icon"></i>  All Organizations </a>
+                <a href="/orgs/new" class="ui right labeled icon button">  <i class="plus icon"></i>  Add an Organization </a>
+              </center>
+          </div>
+          </div>
 
-<body>
-
-    <div class="overlay"></div>
-
-    <!--MAIN CONTENT-->
-                      <h1 align = "center"> ORGS TO PICK </h1>
-                      <p class="bnr-info" align = "center">A database of organizations in UP Diliman <br> Based from PROFS TO PICK</p>
-                          <center>
-                          Search Bar <br>
-                          <a href="/orgs/new" class="btn btn-signup">Add an Organization</a>
-                          </center>
-
-</body>
+  </body>
 </html>
