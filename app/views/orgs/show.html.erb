@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
   </head>
   <body>
+    <%= form_tag(orgs_path, method: :get) do %>
+    Orgs to Pick
+    <div class="ui action input">
+      <%= text_field_tag :keyword, nil, placeholder: "Search..." %>
+      <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2]], params[:noa] ), class:"ui compact selection dropdown") %>
+      <%= hidden_field_tag :search, 1 %>
+      <%= submit_tag 'Search', class: "ui button" %>
+    </div>
+    <% end %>
+    <a href="/orgs" class="ui right labeled icon button">  <i class="list icon"></i>  All Organizations </a>
+    <a href="/orgs/new" class="ui right labeled icon button">  <i class="plus icon"></i>  Add an Organization </a>
     <p>
       <strong>Name:</strong>
       <%= @org.name %>
