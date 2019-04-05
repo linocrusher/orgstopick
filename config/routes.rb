@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'welcome/index'
   post 'ratings/new'
+  post 'orgs/contact'
 
   resources :orgs
   resources :ratings

@@ -45,25 +45,36 @@
           <%= form.text_field :name, placeholder: "Orgs To Pick"%>
         </div>
 
-        * Acronym:
-        <div class="field">
-          <%= form.text_field :acronym, placeholder: "OTP"%>
-        </div>
+        <div class="ui grid">
+          <div class="four wide column">
+            * Acronym:
+            <div class="field">
+              <%= form.text_field :acronym, placeholder: "OTP"%>
+            </div>
+          </div>
 
-        College:
-        <div class="field">
-          <%= form.text_field :college, placeholder: "Engineering"%>
-        </div>
+          <div class="four wide column">
+            College:
+            <div class="field">
+              <%= form.text_field :college, placeholder: "Engineering"%>
+            </div>
+          </div>
 
-        Department:
-        <div class="field">
-          <%= form.text_field :department, placeholder: "DCS"%>
-        </div>
+          <div class="four wide column">
+            Department:
+            <div class="field">
+              <%= form.text_field :department, placeholder: "DCS"%>
+            </div>
+          </div>
 
-        * Scope:
-        <div class="field">
-          <%= form.text_field :scope, placeholder: "(University Wide/For BSXX only)"%>
+          <div class="four wide column">
+            * Scope:
+            <div class="field">
+              <%= form.text_field :scope, placeholder: "(University Wide/For BSXX only)"%>
+            </div>
+          </div>
         </div>
+        <br>
 
         * Description:
         <div class="field">
