@@ -57,3 +57,7 @@ gem 'will_paginate', '3.1.6'
 
 #Semantic UI Pagination
 gem "will_paginate_semantic_ui"
+
+gem 'mysql2'
+
+gem 'yaml_db'
