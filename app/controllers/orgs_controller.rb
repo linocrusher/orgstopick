@@ -5,6 +5,10 @@ class OrgsController < ApplicationController
       @orgs = Org.where("name like ?", "%" + params[:keyword] + "%").paginate(page: params[:page], per_page: 10)
     elsif params[:noa] == "2"
       @orgs = Org.where("acronym like ?", "%" + params[:keyword] + "%").paginate(page: params[:page], per_page: 10)
+    elsif params[:noa] == "3"
+      @orgs = Org.where("college like ?", "%" + params[:keyword] + "%").paginate(page: params[:page], per_page: 10)
+    elsif params[:noa] == "4"
+      @orgs = Org.where("department like ?", "%" + params[:keyword] + "%").paginate(page: params[:page], per_page: 10)
     end
   end
 
@@ -26,6 +30,7 @@ class OrgsController < ApplicationController
     @stot = (@stot.to_f / @ratings.count)
     @atot = (@atot.to_f / @ratings.count)
     @otot = (@ctot + @ptot + @stot + @atot) / 4
+    @org.update(:rating => @otot)
   end
 
   def new
@@ -44,6 +49,6 @@ class OrgsController < ApplicationController
 
   private
   def org_params
-    params.require(:org).permit(:name, :acronym, :college, :department, :scope, :description, :noa, :keyword)
+    params.require(:org).permit(:name, :acronym, :college, :department, :scope, :description, :noa, :keyword, :contact)
   end
 end

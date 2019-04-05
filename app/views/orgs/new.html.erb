@@ -7,14 +7,14 @@
   </head>
   <body>
     <div class="grid">
-    <div class="ui blue inverted menu">
+    <div class="ui fluid four item blue inverted menu">
     <div class="header item">Orgs to Pick</div>
     <a href="/orgs" class="item">  <i class="list icon"></i>  All Organizations </a>
     <a href="/orgs/new" class="item">  <i class="plus icon"></i>  Add an Organization </a>
     <%= form_tag(orgs_path, method: :get) do %>
     <div class="ui input">
       <%= text_field_tag :keyword, nil, placeholder: "Search..." %>
-      <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2]], params[:noa] ), class:"ui compact selection dropdown") %>
+      <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2],["College",3],["Department",4]], params[:noa] ), class:"ui compact selection dropdown") %>
       <%= hidden_field_tag :search, 1 %>
       <%= submit_tag 'Search', class: "ui primary button" %>
     </div>
@@ -68,6 +68,11 @@
         * Description:
         <div class="field">
           <%= form.text_area :description, class: 'textarea', placeholder: "A database for UP Orgs"%>
+        </div>
+
+        Contact Details:
+        <div class="field">
+          <%= form.text_area :contact, class: 'textarea', placeholder: "Website/Email/Number"%>
         </div>
 
         * These fields are required

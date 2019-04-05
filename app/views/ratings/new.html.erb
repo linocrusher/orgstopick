@@ -7,14 +7,14 @@
   </head>
   <body>
     <div class="grid">
-    <div class="ui blue inverted menu">
+    <div class="ui fluid four item blue inverted menu">
     <div class="header item">Orgs to Pick</div>
     <a href="/orgs" class="item">  <i class="list icon"></i>  All Organizations </a>
     <a href="/orgs/new" class="item">  <i class="plus icon"></i>  Add an Organization </a>
     <%= form_tag(orgs_path, method: :get) do %>
     <div class="ui input">
       <%= text_field_tag :keyword, nil, placeholder: "Search..." %>
-      <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2]], params[:noa] ), class:"ui compact selection dropdown") %>
+      <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2],["College",3],["Department",4]], params[:noa] ), class:"ui compact selection dropdown") %>
       <%= hidden_field_tag :search, 1 %>
       <%= submit_tag 'Search', class: "ui primary button" %>
     </div>
@@ -31,21 +31,53 @@
     <%= form_with scope: :rating, url: ratings_path, local: true do |form| %>
     <div class="ui form">
       <%= hidden_field_tag :org, @org.id %>
-      <p>
-        Community: &nbsp&nbsp&nbsp&nbsp&nbsp 0<%= form.range_field :community, in: 1..5 %>5
-      </p>
 
-      <p>
-        Self-benefit: &nbsp&nbsp&nbsp&nbsp&nbsp 0<%= form.range_field :selfbenefit, in: 1..5 %>5
-      </p>
-
-      <p>
-        Purpose: &nbsp&nbsp&nbsp&nbsp&nbsp 0<%= form.range_field :purpose, in: 1..5 %>5
-      </p>
-
-      <p>
-        Application Process: &nbsp&nbsp&nbsp&nbsp&nbsp 0<%= form.range_field :application, in: 1..5 %>5
-      </p>
+      <div class="ui cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">Community</div>
+            <div class="description">
+              The general feeling when you're with the other members
+            </div>
+            <div class="extra">
+              1<%= form.range_field :community, in: 1..5 %>5
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">Self-benefit</div>
+            <div class="description">
+              The skills and other gains you have acquired since joining
+            </div>
+            <div class="extra">
+              1<%= form.range_field :selfbenefit, in: 1..5 %>5
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">Purpose</div>
+            <div class="description">
+              The quality and significance of the objectives of the organization
+            </div>
+            <div class="extra">
+              1<%= form.range_field :purpose, in: 1..5 %>5
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="content">
+            <div class="header">Application Process</div>
+            <div class="description">
+              Reasonability and relevance of the application process
+            </div>
+            <div class="extra">
+              1<%= form.range_field :application, in: 1..5 %>5
+            </div>
+          </div>
+        </div>
+      </div>
 
       <p>
         Details:
@@ -55,7 +87,7 @@
       </p>
 
       <p>
-        <%= form.submit('Submit', class: "ui primary button") %>
+        <%= form.submit('Submit', class: "ui primary button", data: {confirm: "By clicking OK you agree that all of your inputs are sincere."}) %>
         <%= link_to "Back", org_path(@org) %>
       </p>
       </div>

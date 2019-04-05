@@ -7,14 +7,14 @@
   </head>
   <body>
     <div class="grid">
-    <div class="ui blue inverted menu">
+    <div class="ui fluid four item blue inverted menu">
     <div class="header item">Orgs to Pick</div>
     <a href="/orgs" class="item">  <i class="list icon"></i>  All Organizations </a>
     <a href="/orgs/new" class="item">  <i class="plus icon"></i>  Add an Organization </a>
     <%= form_tag(orgs_path, method: :get) do %>
     <div class="ui input">
       <%= text_field_tag :keyword, nil, placeholder: "Search..." %>
-      <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2]], params[:noa] ), class:"ui compact selection dropdown") %>
+      <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2],["College",3],["Department",4]], params[:noa] ), class:"ui compact selection dropdown") %>
       <%= hidden_field_tag :search, 1 %>
       <%= submit_tag 'Search', class: "ui primary button" %>
     </div>
@@ -26,48 +26,83 @@
     <div class="ui grid">
     <div class="two wide column"></div>
     <div class="twelve wide column">
-    <h1><%= @org.name %></h1>
 
-    <p>
-      <strong>Acronym:</strong>
-      <%= @org.acronym %>
-    </p>
+      <div class="ui segments">
+        <div class="ui blue inverted segment">
+          <h1><%= @org.name %> (<%= @org.acronym %>)</h1>
+        </div>
+        <div class="ui segment">
+          <p><strong>Description:</strong> <%= @org.description %></p>
+        </div>
+        <div class="ui horizontal segments">
+          <div class="ui segment">
+            <p><strong>Scope:</strong> <%= @org.scope %></p>
+          </div>
+          <div class="ui segment">
+            <p><strong>College:</strong> <%= @org.college %></p>
+          </div>
+          <div class="ui segment">
+            <p><strong>Department:</strong> <%= @org.department %></p>
+          </div>
+        </div>
+        <div class="ui segment">
+          <p><strong>Contact Details:</strong> <%= @org.contact %></p>
+        </div>
+      </div>
 
-    <p>
-      <strong>College:</strong>
-      <%= @org.college %>
-    </p>
+      <br>
 
-    <p>
-      <strong>Department:</strong>
-      <%= @org.department %>
-    </p>
-
-    <p>
-      <strong>Scope:</strong>
-      <%= @org.scope %>
-    </p>
-
-    <p>
-      <strong>Description:</strong>
-      <%= @org.description %>
-    </p>
-
-    <p>
-      Community: <%= @ctot %> <br>
-      Purpose: <%= @ptot %> <br>
-      Self-Benefit: <%= @stot %> <br>
-      App Process: <%= @atot %> <br>
-      Overall: <%= @otot %> <br>
-    </p>
-
-    <h1> Comments and Ratings </h1>
+    <div class="ui five statistics">
+      <div class="statistic">
+        <div class="value">
+          <% if @ratings.count > 0 %> <%= @otot %> <% else %> - <% end %><i class="chart pie icon"></i>
+        </div>
+        <div class="label">
+          Overall
+        </div>
+      </div>
+      <div class="statistic">
+        <div class="value">
+          <% if @ratings.count > 0 %> <%= @ctot %> <% else %> - <% end %><i class="users icon"></i>
+        </div>
+        <div class="label">
+          Community
+        </div>
+      </div>
+      <div class="statistic">
+        <div class="value">
+          <% if @ratings.count > 0 %> <%= @ptot %> <% else %> - <% end %><i class="bullseye icon"></i>
+        </div>
+        <div class="label">
+          Purpose
+        </div>
+      </div>
+      <div class="statistic">
+        <div class="value">
+          <% if @ratings.count > 0 %> <%= @stot %> <% else %> - <% end %><i class="user icon"></i>
+        </div>
+        <div class="label">
+          Self-Benefit
+        </div>
+      </div>
+      <div class="statistic">
+        <div class="value">
+          <% if @ratings.count > 0 %> <%= @atot %> <% else %> - <% end %><i class="clipboard list icon"></i>
+        </div>
+        <div class="label">
+          Application Process
+        </div>
+      </div>
+    </div>
 
     <table class="ui celled table">
       <thead>
       <tr>
-        <th colspan="2">Rating</th>
-        <th>Comment</th>
+          <th colspan="3"><h4 class="center aligned header"> Comments and Ratings </h4></th>
+      </tr>
+      <tr>
+        <th colspan="2" class="four wide">Rating</th>
+        <th class="twelve wide">Comment</th>
       </tr>
       </thead>
 
@@ -79,10 +114,10 @@
           Self-Benefit:<br>
           App Process:</td>
 
-          <td><%= r.community %><br>
-          <%= r.purpose %><br>
-          <%= r.selfbenefit %><br>
-          <%= r.application %></td>
+          <td><% r.community.to_i.times do  %> <i class="star icon"></i><% end %><% (5-r.community.to_i).times do  %> <i class="star outline icon"></i><% end %><br>
+          <% r.purpose.to_i.times do  %> <i class="star icon"></i><% end %><% (5-r.purpose.to_i).times do  %> <i class="star outline icon"></i><% end %><br>
+          <% r.selfbenefit.to_i.times do  %> <i class="star icon"></i><% end %><% (5-r.selfbenefit.to_i).times do  %> <i class="star outline icon"></i><% end %><br>
+          <% r.application.to_i.times do  %> <i class="star icon"></i><% end %><% (5-r.application.to_i).times do  %> <i class="star outline icon"></i><% end %></td>
 
           <td><%= r.details %></td>
         </tr>
@@ -97,7 +132,7 @@
 
     <%= form_with url: new_rating_path, local: true do |form| %>
         <%= hidden_field_tag :id, @org.id %>
-        <%= form.submit 'Add Rating', class: 'ui primary button' %>
+        <div class="ui primary button" data-tooltip="Please be honest and avoid spamming comments."><%= form.submit 'Add Rating', class: 'ui primary button' %></div>
     <% end %>
     </div>
     <div class="two wide column"></div>
