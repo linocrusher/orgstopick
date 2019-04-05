@@ -1,26 +1,45 @@
 class OrgsController < ApplicationController
   def index
-    @orgs = Org.all
+    @orgs = Org.all.paginate(page: params[:page], per_page: 10)
     if params[:noa] == "1"
-      @orgs = Org.where("name like ?", "%" + params[:keyword] + "%")
+      @orgs = Org.where("name like ?", "%" + params[:keyword] + "%").paginate(page: params[:page], per_page: 10)
     elsif params[:noa] == "2"
-      @orgs = Org.where("acronym like ?", "%" + params[:keyword] + "%")
+      @orgs = Org.where("acronym like ?", "%" + params[:keyword] + "%").paginate(page: params[:page], per_page: 10)
     end
   end
 
   def show
     @org = Org.find(params[:id])
-    @ratings = Rating.where(:org => @org)
+    @ratings = Rating.where(:org => @org).paginate(page: params[:page], per_page: 10)
+    @ctot = 0
+    @ptot = 0
+    @stot = 0
+    @atot = 0
+    @ratings.each do |r|
+      @ctot = @ctot + r.community
+      @ptot = @ptot + r.purpose
+      @stot = @stot + r.selfbenefit
+      @atot = @atot + r.application
+    end
+    @ctot = (@ctot.to_f / @ratings.count)
+    @ptot = (@ptot.to_f / @ratings.count)
+    @stot = (@stot.to_f / @ratings.count)
+    @atot = (@atot.to_f / @ratings.count)
+    @otot = (@ctot + @ptot + @stot + @atot) / 4
   end
 
   def new
+    @org = Org.new
   end
 
   def create
     @org = Org.new(org_params)
 
-    @org.save
-    redirect_to @org
+    if @org.save
+      redirect_to @org
+    else
+      render 'new'
+    end
   end
 
   private

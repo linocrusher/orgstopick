@@ -6,68 +6,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
   </head>
   <body>
+    <div class="grid">
+    <div class="ui blue inverted menu">
+    <div class="header item">Orgs to Pick</div>
+    <a href="/orgs" class="item">  <i class="list icon"></i>  All Organizations </a>
+    <a href="/orgs/new" class="item">  <i class="plus icon"></i>  Add an Organization </a>
     <%= form_tag(orgs_path, method: :get) do %>
-    Orgs to Pick
-    <div class="ui action input">
+    <div class="ui input">
       <%= text_field_tag :keyword, nil, placeholder: "Search..." %>
       <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2]], params[:noa] ), class:"ui compact selection dropdown") %>
       <%= hidden_field_tag :search, 1 %>
-      <%= submit_tag 'Search', class: "ui button" %>
+      <%= submit_tag 'Search', class: "ui primary button" %>
     </div>
     <% end %>
-    <a href="/orgs" class="ui right labeled icon button">  <i class="list icon"></i>  All Organizations </a>
-    <a href="/orgs/new" class="ui right labeled icon button">  <i class="plus icon"></i>  Add an Organization </a>
+    </div>
+    </div>
+    <br>
+
+    <div class="ui grid">
+    <div class="two wide column"></div>
+    <div class="twelve wide column">
     <h1>Add Organization</h1>
+
+    <% if @org.errors.any? %>
+      <div class="ui error message">
+        <ul class="list">
+          <% @org.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
     <%= form_with scope: :org, url: orgs_path, local: true do |form| %>
       <div class="ui form">
-      <p>
-        Name:
+        * Full Name:
         <div class="field">
           <%= form.text_field :name, placeholder: "Orgs To Pick"%>
         </div>
-      </p>
 
-      <p>
-        Acronym:
+        * Acronym:
         <div class="field">
           <%= form.text_field :acronym, placeholder: "OTP"%>
         </div>
-      </p>
 
-      <p>
         College:
         <div class="field">
           <%= form.text_field :college, placeholder: "Engineering"%>
         </div>
-      </p>
 
-      <p>
         Department:
         <div class="field">
           <%= form.text_field :department, placeholder: "DCS"%>
         </div>
-      </p>
 
-      <p>
-        Scope:
+        * Scope:
         <div class="field">
-          <%= form.text_field :scope, placeholder: "University Wide"%>
+          <%= form.text_field :scope, placeholder: "(University Wide/For BSXX only)"%>
         </div>
-      </p>
 
-      <p>
-        Description:
+        * Description:
         <div class="field">
           <%= form.text_area :description, class: 'textarea', placeholder: "A database for UP Orgs"%>
         </div>
-      </p>
+
+        * These fields are required
 
       <p>
           <%= form.submit('Submit', class: "ui primary button") %>
       </p>
     <% end %>
     </div>
-
+    </div>
+    <div class="two wide column"></div>
+    </div>
   </body>
 </html>

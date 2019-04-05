@@ -51,3 +51,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #Semantic UI gem
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+
+#Pagination gem
+gem 'will_paginate', '3.1.6'
+
+#Semantic UI Pagination
+gem "will_paginate_semantic_ui"

@@ -12,16 +12,17 @@
           <h1 align = "center"> ORGS TO PICK </h1>
           <p align = "center">A database of organizations in UP Diliman <br> Based from PROFS TO PICK</p>
               <center>
+                <%= form_tag(orgs_path, method: :get) do %>
                 <div class="ui action input">
-                  <input type="text" placeholder="Search...">
-                  <select class="ui compact selection dropdown">
-                    <option selected="" value="name">Name</option>
-                    <option value="acronym">Acronym</option>
-                  </select>
-                  <div class="ui button">Search</div>
-                </div> <br><br>
-                <a href="/orgs" class="ui right labeled icon button">  <i class="list icon"></i>  All Organizations </a>
-                <a href="/orgs/new" class="ui right labeled icon button">  <i class="plus icon"></i>  Add an Organization </a>
+                  <%= text_field_tag :keyword, nil, placeholder: "Search..." %>
+                  <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2]], params[:noa] ), class:"ui compact selection dropdown") %>
+                  <%= hidden_field_tag :search, 1 %>
+                  <%= submit_tag 'Search', class: "ui primary button" %>
+                </div>
+                <br><br>
+                <a href="/orgs" class="ui right labeled icon blue button">  <i class="list icon"></i>  All Organizations </a>
+                <a href="/orgs/new" class="ui right labeled icon blue button">  <i class="plus icon"></i>  Add an Organization </a>
+                <% end %>
               </center>
           </div>
           </div>

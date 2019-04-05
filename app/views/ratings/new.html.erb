@@ -6,37 +6,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
   </head>
   <body>
+    <div class="grid">
+    <div class="ui blue inverted menu">
+    <div class="header item">Orgs to Pick</div>
+    <a href="/orgs" class="item">  <i class="list icon"></i>  All Organizations </a>
+    <a href="/orgs/new" class="item">  <i class="plus icon"></i>  Add an Organization </a>
     <%= form_tag(orgs_path, method: :get) do %>
-    Orgs to Pick
-    <div class="ui action input">
+    <div class="ui input">
       <%= text_field_tag :keyword, nil, placeholder: "Search..." %>
       <%= select_tag(:noa, options_for_select([["Name",1],["Acronym",2]], params[:noa] ), class:"ui compact selection dropdown") %>
       <%= hidden_field_tag :search, 1 %>
-      <%= submit_tag 'Search', class: "ui button" %>
+      <%= submit_tag 'Search', class: "ui primary button" %>
     </div>
     <% end %>
-    <a href="/orgs" class="ui right labeled icon button">  <i class="list icon"></i>  All Organizations </a>
-    <a href="/orgs/new" class="ui right labeled icon button">  <i class="plus icon"></i>  Add an Organization </a>
+    </div>
+    </div>
+    <br>
+
+    <div class="ui grid">
+    <div class="two wide column"></div>
+    <div class="twelve wide column">
     <h1>Rate <%=@org.name%> </h1>
 
     <%= form_with scope: :rating, url: ratings_path, local: true do |form| %>
     <div class="ui form">
       <%= hidden_field_tag :org, @org.id %>
       <p>
-        Community: <%= form.number_field :community %>
-        <div class="ui star rating" data-rating="0" data-max-rating="5"></div>
+        Community: &nbsp&nbsp&nbsp&nbsp&nbsp 0<%= form.range_field :community, in: 1..5 %>5
       </p>
 
       <p>
-        Self-benefit: <%= form.number_field :selfbenefit %>
+        Self-benefit: &nbsp&nbsp&nbsp&nbsp&nbsp 0<%= form.range_field :selfbenefit, in: 1..5 %>5
       </p>
 
       <p>
-        Purpose: <%= form.number_field :purpose %>
+        Purpose: &nbsp&nbsp&nbsp&nbsp&nbsp 0<%= form.range_field :purpose, in: 1..5 %>5
       </p>
 
       <p>
-        Application Process: <%= form.number_field :application %>
+        Application Process: &nbsp&nbsp&nbsp&nbsp&nbsp 0<%= form.range_field :application, in: 1..5 %>5
       </p>
 
       <p>
@@ -48,8 +56,12 @@
 
       <p>
         <%= form.submit('Submit', class: "ui primary button") %>
+        <%= link_to "Back", org_path(@org) %>
       </p>
       </div>
     <% end %>
+    </div>
+    <div class="two wide column"></div>
+    </div>
   </body>
 </html>
