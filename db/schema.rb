@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20190405115113) do
     t.integer "selfbenefit"
     t.integer "application"
     t.text "details"
-    t.integer "org_id"
+    t.bigint "org_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["org_id"], name: "index_ratings_on_org_id"
   end
 
+  add_foreign_key "ratings", "orgs"
 end
