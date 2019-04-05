@@ -59,3 +59,5 @@ gem "will_paginate_semantic_ui"
 gem 'mysql2'
 
 gem 'yaml_db'
+
+gem 'webpacker'
