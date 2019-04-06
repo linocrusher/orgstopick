@@ -22,18 +22,20 @@ class OrgsController < ApplicationController
       @ptot = 0
       @stot = 0
       @atot = 0
-      @ratings.each do |r|
-        @ctot = @ctot + r.community
-        @ptot = @ptot + r.purpose
-        @stot = @stot + r.selfbenefit
-        @atot = @atot + r.application
+      if @ratings.count > 0
+        @ratings.each do |r|
+          @ctot = @ctot + r.community
+          @ptot = @ptot + r.purpose
+          @stot = @stot + r.selfbenefit
+          @atot = @atot + r.application
+        end
+        @ctot = (@ctot.to_f / @ratings.count)
+        @ptot = (@ptot.to_f / @ratings.count)
+        @stot = (@stot.to_f / @ratings.count)
+        @atot = (@atot.to_f / @ratings.count)
+        @otot = (@ctot + @ptot + @stot + @atot) / 4
+        @org.update(:rating => @otot)
       end
-      @ctot = (@ctot.to_f / @ratings.count)
-      @ptot = (@ptot.to_f / @ratings.count)
-      @stot = (@stot.to_f / @ratings.count)
-      @atot = (@atot.to_f / @ratings.count)
-      @otot = (@ctot + @ptot + @stot + @atot) / 4
-      @org.update(:rating => @otot)
     end
   end
 

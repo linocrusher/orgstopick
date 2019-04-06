@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20190405115113) do
 
-  create_table "orgs", force: :cascade do |t|
+  create_table "orgs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "acronym"
     t.string "college"
@@ -21,20 +21,21 @@ ActiveRecord::Schema.define(version: 20190405115113) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "department"
-    t.float "rating"
+    t.float "rating", limit: 24
     t.text "contact"
   end
 
-  create_table "ratings", force: :cascade do |t|
+  create_table "ratings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "community"
     t.integer "purpose"
     t.integer "selfbenefit"
     t.integer "application"
     t.text "details"
-    t.integer "org_id"
+    t.bigint "org_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["org_id"], name: "index_ratings_on_org_id"
   end
 
+  add_foreign_key "ratings", "orgs"
 end
